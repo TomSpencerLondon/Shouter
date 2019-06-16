@@ -1,0 +1,39 @@
+<div class="container">
+  <%= div_for shout do %>
+    <div class="row">
+      <div class="col-sm-12 strip">
+        <%= gravatar(shout.user) %>
+        <strong>
+          <%= link_to shout.user.username,
+                      shout.user,
+                      class:"shout-link", id: "primary-shout-user-link-#{shout.id}" %>
+        </strong>
+        <span class="light"> @<%= link_to shout.user.username,
+                                          shout.user,
+                                          class:"shout-link",
+                                          id: "secondary-shout-user-link-#{shout.id}" %> - <span class="time">
+                                              <%= link_to time_ago_in_words(shout.created_at),
+                                                          shout,
+                                                          class:"shout-link", id: "shout-link-#{shout.id}" %>
+                                            </span>
+                                            </span>
+                                          <br>
+        <%= render shout.content %><br>
+        
+        <div class="summary">
+          <span class="buttons">
+            <% if shout.user == current_user %>
+              <%= link_to 'Delete Shout', shout, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger', id: 'delete-button' %>
+            <% end %>
+            <a href="#"><i class="fa fa-reply"></i> Reply</a>
+            <a href="#"><i class="fa fa-retweet"></i> Retweet</a>
+            <a href="#"><i class="fa fa-star"></i> Favourite</a>
+            <a href="#"><i class="fa fa-ellipsis-h"></i> More</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+

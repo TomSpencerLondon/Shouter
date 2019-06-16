@@ -1,0 +1,7 @@
+<%= image_tag(photo_shout.image.url(:shout),
+              { data: { toggle: "modal",
+                        target: ".bd-example-modal-sm",
+                        shout: "#{photo_shout.image.url(:medium)}"
+                      },
+                class: "modalImage"
+              }) %>
