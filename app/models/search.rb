@@ -6,7 +6,7 @@ class Search
   end
 
   def shouts
-    Shout.search(search_term, includes: [:content], match: :word_start).results
+    Shout.search(search_term, includes: [:content], match: :phrase).results
   end
 
   private
