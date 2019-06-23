@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe User do
+describe User, type: :model do
   let(:email) { "lewis@lewis.com" }
   let(:password_digest) { "Testing123" }
   let(:username) { "lewis" }
@@ -16,6 +17,35 @@ describe User do
                       email: 'harry@harry.com',
                       username: 'Harry',
                       password_digest: 'Testing123')
+  end
+
+  it { should have_many(:followed_user_relationships) }
+  it { should have_many(:followed_users) }
+  it { should have_many(:follower_relationships) }
+  it { should have_many(:followers) }
+
+  context 'Following Concern' do
+    it '#follow follows a user' do
+      user.follow(user_two)
+      expect(user.following?(user_two)).to eq(true)
+    end
+
+    it '#unfollow unfollows a user' do
+      user.follow(user_two)
+      expect(user.following?(user_two)).to eq(true)
+
+      user.unfollow(user_two)
+      expect(user.following?(user_two)).to eq(false)
+    end
+
+    it '#can_follow? checks other user id is different' do
+      expect(user.can_follow?(user_two)).to eq(true)
+    end
+
+    it '#can_follow? is false if current_user is same user' do
+      current_user = user
+      expect(current_user.can_follow?(user)).to eq(false)
+    end
   end
 
   context 'invalid user' do

@@ -6,8 +6,8 @@ module ShoutHelpers
     find('#photo-shout-submit').click()
   end
 
-  def add_text_shout
-    find('input[name="text_shout[body]"]').set("Hello! This is a new text shout.")
+  def add_text_shout(text)
+    find('input[name="text_shout[body]"]').set(text)
     find('#text-shout-submit').click()
   end
 end

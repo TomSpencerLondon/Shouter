@@ -24,7 +24,7 @@ describe "Dashboard" do
 
     it 'text_shout submission succeeds' do
       feature_sign_up_and_login
-      add_text_shout
+      add_text_shout("Hello! This is a new text shout.")
       expect(page.body.include?("Hello! This is a new text shout.")).to eq(true)
     end
 

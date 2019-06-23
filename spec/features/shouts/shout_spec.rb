@@ -4,13 +4,10 @@ describe "Shouts" do
   include LoginHelpers
   include ShoutHelpers
 
-  before do
-    feature_sign_up_and_login
-  end
-
   context 'text_shout' do
     before do
-      add_text_shout
+      feature_sign_up_and_login
+      add_text_shout("Hello! This is a new text shout.")
     end
 
     it 'has links and content' do
@@ -38,6 +35,7 @@ describe "Shouts" do
 
   context 'photo_shout' do
     before do
+      feature_sign_up_and_login
       add_photo_shout
     end
 
@@ -49,10 +47,9 @@ describe "Shouts" do
       expect(page).to have_css('#shout-link-1')
     end
 
-    it '#photo-shout-1 link shows modal' do
+    it '#photo-shout-1 link shows modal', js: true do
       find('#photo-shout-1').click()
-      require 'pry'; binding.pry
-      expect(page).to have_css('.modal-content')
+      expect(page).to have_css('#open-modal-image')
     end
 
     it '#primary-shout-user-link goes to user show page' do
@@ -61,7 +58,7 @@ describe "Shouts" do
     end
 
     it '#secondary-shout-user-link-1 goes to user show page' do
-      find('#primary-shout-user-link-1').click()
+      find('#secondary-shout-user-link-1').click()
       expect(page.body).to have_css('.users.show')
     end
 
@@ -71,43 +68,3 @@ describe "Shouts" do
     end
   end
 end
-
-# <div class="container">
-#   <%= div_for shout do %>
-#     <div class="row">
-#       <div class="col-sm-12 strip">
-#         <%= gravatar(shout.user) %>
-#         <strong>
-#           <%= link_to shout.user.username,
-#                       shout.user,
-#                       class:"shout-link", id: "primary-shout-user-link-#{shout.id}" %>
-#         </strong>
-#         <span class="light"> @<%= link_to shout.user.username,
-#                                           shout.user,
-#                                           class:"shout-link",
-#                                           id: "secondary-shout-user-link-#{shout.id}" %> - <span class="time">
-#                                               <%= link_to time_ago_in_words(shout.created_at),
-#                                                           shout,
-#                                                           class:"shout-link", id: "shout-link-#{shout.id}" %>
-#                                             </span>
-#                                             </span>
-#                                           <br>
-#         <%= render shout.content %><br>
-        
-#         <div class="summary">
-#           <span class="buttons">
-#             <% if shout.user == current_user %>
-#               <%= link_to 'Delete Shout', shout, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger', id: 'delete-button' %>
-#             <% end %>
-#             <a href="#"><i class="fa fa-reply"></i> Reply</a>
-#             <a href="#"><i class="fa fa-retweet"></i> Retweet</a>
-#             <a href="#"><i class="fa fa-star"></i> Favourite</a>
-#             <a href="#"><i class="fa fa-ellipsis-h"></i> More</a>
-#           </span>
-#         </div>
-#       </div>
-#     </div>
-#   <% end %>
-# </div>
-
-

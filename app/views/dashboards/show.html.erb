@@ -1,15 +1,20 @@
-<div id="shout-form">
-  <%= bootstrap_form_for @dashboard.new_text_shout do |form| %>
-    <%= form.text_field :body, label_as_placeholder: true %>
-    <%= form.submit 'Shout!', class: "btn btn-primary", id: 'text-shout-submit' %>
-  <% end %>
-</div>
-
-<div id="photo-shout-form">
-  <%= bootstrap_form_for @dashboard.new_photo_shout do |form| %>
-    <%= form.file_field :image, label_as_placeholder: true %>
-    <%= form.submit 'Shout!', class: "btn btn-primary", id: 'photo-shout-submit' %>
-  <% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div id="shout-form">
+      <%= bootstrap_form_for @dashboard.new_text_shout do |form| %>
+        <%= form.text_field :body, label_as_placeholder: true %>
+        <%= form.submit 'Text Shout!', class: "btn btn-primary", id: 'text-shout-submit' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div id="photo-shout-form">
+      <%= bootstrap_form_for @dashboard.new_photo_shout do |form| %>
+        <%= form.file_field :image, label_as_placeholder: true %>
+        <%= form.submit 'Photo Shout!', class: "btn btn-primary", id: 'photo-shout-submit' %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <%= render @dashboard.timeline %>

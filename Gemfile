@@ -45,7 +45,8 @@ gem 'simple_form'
 gem 'pry'
 gem 'paperclip'
 gem 'webpacker', github: 'rails/webpacker'
-
+gem 'searchkick'
+gem 'pry-nav'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,6 +56,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
 
 group :development do
