@@ -34,6 +34,6 @@ describe ShoutsController, type: :request do
 end
 
 def create_user_shouts
-  FactoryBot.create(:shout, :text_shout, user: user)
-  FactoryBot.create(:shout, :photo_shout, user: user)
+  FactoryBot.create(:shout, :reindex, :text_shout, user: user)
+  FactoryBot.create(:shout, :reindex, :photo_shout, user: user)
 end

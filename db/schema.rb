@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2019_06_04_201642) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "following_relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_user_id"
+    t.bigint "follower_id"
+    t.bigint "followed_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["followed_user_id"], name: "index_following_relationships_on_followed_user_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_201642) do
   end
 
   create_table "shouts", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "content_type"
@@ -52,4 +55,5 @@ ActiveRecord::Schema.define(version: 2019_06_04_201642) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "shouts", "users"
 end
